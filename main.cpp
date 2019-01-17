@@ -159,44 +159,7 @@ int travllingSalesmanProblem( int s , int V)
         min_path = min(min_path, current_pathweight);
 
 
-    }
-
-/*
-
-    do {
-
-        // store current Path weight(cost)
-        int current_pathweight = 0;
-
-        // compute current path weight
-        int k = s;
-        for (int i = 0; i < vertex.size(); i++) {
-            current_pathweight += Matrix[k][vertex[i]].distance;
-
-
-            if(Matrix[k][k].visited == false) {
-
-                weight+= Matrix[k][k].weight;
-                Matrix[k][k].visited = true;
-            }
-            if(Matrix[vertex[i]][vertex[i]].visited == false) {
-
-                Matrix[vertex[i]][vertex[i]].visited = true;
-                weight+= Matrix[vertex[i]][vertex[i]].weight;
-            }
-            //weight+= Matrix[k][k].weight;
-            //cout<<k << " " << vertex.size() <<endl;
-
-            k = vertex[i];
-
-        }
-        current_pathweight += Matrix[k][s].distance;
-        //cout<<Matrix[s][s].name<<endl;
-        // update minimum
-        min_path = min(min_path, current_pathweight);
-        //min_path  = current_pathweight;
-    } while (next_permutation(vertex.begin(), vertex.end()));
-*/
+   }
     cout<<weight<<endl;
     return min_path;
 }
