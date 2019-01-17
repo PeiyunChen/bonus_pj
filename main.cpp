@@ -1,3 +1,4 @@
+/* bonus project move 2 nodes*/
 
 #include<iostream>
 #include<string>
@@ -81,7 +82,7 @@ int main()
                 if(Matrix[k][k].name == first_name ){
                     first_idx = Matrix[k][k].idx;
                 }
-                else if(Matrix[k][k].name == second_name){
+                else if(Matrix[k][k].name == second_name ){
                     sec_idx = Matrix[k][k].idx;
                 }
             }
@@ -94,6 +95,36 @@ int main()
         }
 
 
+        int maxHappiness = 0;
+        Node firstNode ;
+        for(int i=0;i<nodes_num ; i++){
+            if(Matrix[i][i].weight>=maxHappiness){
+                maxHappiness = Matrix[i][i].weight;
+                firstNode = Matrix[i][i];
+            }
+        }
+        int maxHappiness2 = 0;
+        int dis = 0;
+        Node secondNode ;
+        for(int i =0;i<nodes_num;i++){
+            if(Matrix[i][i].weight>=maxHappiness2){
+                if(Matrix[i][i].idx!=firstNode.idx && Matrix[i][firstNode.idx].distance!=0){
+                    if(total_time>= 2* Matrix[i][firstNode.idx].distance)
+                    maxHappiness2 = Matrix[i][i].weight;
+                    secondNode = Matrix[i][i];
+                    dis = Matrix[i][firstNode.idx].distance;
+                }
+
+            }
+        }
+        cout<<firstNode.weight+secondNode.weight<<" "<< 2*dis<<endl;
+
+        int cur_time = start_time;
+        cout<<firstNode.name << " " <<cur_time << " " << cur_time<<endl;
+        cur_time += dis;
+        cout<< secondNode.name<< " " << cur_time<<" " << cur_time<<endl;
+        cur_time += dis;
+        cout<< firstNode.name << " " <<cur_time << " " << cur_time <<endl;
 
         for(int i=0 ; i<nodes_num ; i++){
             for(int j=0;j<nodes_num ; j++){
@@ -102,7 +133,7 @@ int main()
             cout<<endl;
         }
         int s = 0;
-        cout<<travllingSalesmanProblem( s , nodes_num);
+        //cout<<travllingSalesmanProblem( s , nodes_num);
 
 	}
 }
@@ -117,148 +148,3 @@ void createMatrix(int num)
 
 }
 
-int travllingSalesmanProblem( int s , int V)
-{
-    // store all vertex apart from source vertex
-    int weight=0;
-    vector<int> vertex;
-    for (int i = 0; i < V; i++)
-        if (i != s)
-            vertex.push_back(i);
-
-    // store minimum weight Hamiltonian Cycle.
-    int min_path = INT_MAX;
-    while (next_permutation(vertex.begin(), vertex.end())){
-        int current_pathweight = 0;
-
-        // compute current path weight
-        int k = s;
-        for (int i = 0; i < vertex.size(); i++) {
-            current_pathweight += Matrix[k][vertex[i]].distance;
-
-
-            if(Matrix[k][k].visited == false) {
-
-                weight+= Matrix[k][k].weight;
-                Matrix[k][k].visited = true;
-            }
-            if(Matrix[vertex[i]][vertex[i]].visited == false) {
-
-                Matrix[vertex[i]][vertex[i]].visited = true;
-                weight+= Matrix[vertex[i]][vertex[i]].weight;
-            }
-            //weight+= Matrix[k][k].weight;
-            //cout<<k << " " << vertex.size() <<endl;
-
-            k = vertex[i];
-
-        }
-        current_pathweight += Matrix[k][s].distance;
-        //cout<<Matrix[s][s].name<<endl;
-        // update minimum
-        min_path = min(min_path, current_pathweight);
-
-
-   }
-    cout<<weight<<endl;
-    return min_path;
-}
-/*#include<stdio.h>
-
-int ary[10][10],completed[10],n,cost=0;
-int least(int c);
-void takeInput()
-{
-	int i,j;
-
-	printf("Enter the number of villages: ");
-	scanf("%d",&n);
-
-	printf("\nEnter the Cost Matrix\n");
-
-	for(i=0;i < n;i++)
-	{
-		printf("\nEnter Elements of Row: %d\n",i+1);
-
-		for( j=0;j < n;j++)
-			scanf("%d",&ary[i][j]);
-
-		completed[i]=0;
-	}
-
-	printf("\n\nThe cost list is:");
-
-	for( i=0;i < n;i++)
-	{
-		printf("\n");
-
-		for(j=0;j < n;j++)
-			printf("\t%d",ary[i][j]);
-	}
-}
-
-void mincost(int city)
-{
-	int i,ncity;
-
-	completed[city]=1;
-
-	printf("%d--->",city+1);
-	ncity=least(city);
-OBOBOB
-	if(ncity==999)
-	{
-		ncity=0;
-		printf("%d",ncity+1);
-		cost+=ary[city][ncity];
-
-		return;
-	}
-
-	mincost(ncity);
-}
-
-OBOBOBint least(int c)
-{
-	int i,nc=999;
-	int min=999,kmin;
-
-OBOBOB	for(i=0;i < n;i++)
-	{
-		if((ary[c][i]!=0)&&(completed[i]==0))
-			if(ary[c][i]+ary[i][c] < min)
-			{
-				min=ary[i][0]+ary[c][i];
-				kmin=ary[c][i];
-				nc=i;
-			}
-	}
-
-	if(min!=999)
-		cost+=kmin;
-
-OBOBOB	return nc;
-}
-
-int main()
-{
-	takeInput();
-
-	printf("\n\nThe Path is:\n");
-OBOBOB	mincost(0); //passing 0 because starting vertex
-
-	printf("\n\nMinimum cost is %d\n ",cost);
-OBOBOB
-	return 0;
-}
-*//*
-// do_while_statement.cpp
-#include <stdio.h>
-int main()
-{
-    int i = 0;
-    while (i < 3)
-    {
-        printf("\n%d",i++);
-OBOBOB    }
-}*/
